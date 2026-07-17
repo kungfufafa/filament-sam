@@ -2,7 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use Apriansyahrs\MekayaTheme\MekayaPlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -11,6 +13,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -28,8 +31,15 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
             ->plugin(MekayaPlugin::make())
+            ->login(Login::class)
+            ->registration(null)
+            ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn (): string => view('filament.one-signal')->render(),
+            )
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -53,6 +63,10 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+            ])
+            ->plugins([
+                FilamentShieldPlugin::make()
+                    ->registerNavigation(false),
             ])
             ->authMiddleware([
                 Authenticate::class,

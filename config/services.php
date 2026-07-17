@@ -22,6 +22,12 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'one_signal' => [
+        'app_id' => env('ONESIGNAL_APP_ID'),
+        'api_key' => env('ONESIGNAL_API_KEY'),
+        'safari_web_id' => env('ONESIGNAL_SAFARI_WEB_ID'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

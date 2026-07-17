@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Filament\Resources\BusinessEntities\Pages;
+
+use App\Filament\Resources\BusinessEntities\BusinessEntityResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\Width;
+
+class ListBusinessEntities extends ListRecords
+{
+    protected static string $resource = BusinessEntityResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            CreateAction::make()
+                ->slideOver()
+                ->modalWidth(Width::Medium),
+        ];
+    }
+}
