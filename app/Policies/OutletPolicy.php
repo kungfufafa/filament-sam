@@ -27,16 +27,6 @@ class OutletPolicy
         return $authUser->can('Create:Outlet');
     }
 
-    public function import(AuthUser $authUser): bool
-    {
-        return $authUser->can('Import:Outlet');
-    }
-
-    public function export(AuthUser $authUser): bool
-    {
-        return $authUser->can('Export:Outlet');
-    }
-
     public function update(AuthUser $authUser, Outlet $outlet): bool
     {
         return $authUser->can('Update:Outlet');
@@ -70,5 +60,15 @@ class OutletPolicy
     public function restoreAny(AuthUser $authUser): bool
     {
         return $authUser->can('RestoreAny:Outlet');
+    }
+
+    public function import(AuthUser $authUser, Outlet $outlet): bool
+    {
+        return $authUser->can('Import:Outlet');
+    }
+
+    public function export(AuthUser $authUser, Outlet $outlet): bool
+    {
+        return $authUser->can('Export:Outlet');
     }
 }

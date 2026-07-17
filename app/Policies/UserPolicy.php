@@ -24,16 +24,6 @@ class UserPolicy
         return $authUser->can('Create:User');
     }
 
-    public function import(AuthUser $authUser): bool
-    {
-        return $authUser->can('Import:User');
-    }
-
-    public function export(AuthUser $authUser): bool
-    {
-        return $authUser->can('Export:User');
-    }
-
     public function update(AuthUser $authUser): bool
     {
         return $authUser->can('Update:User');
@@ -67,5 +57,15 @@ class UserPolicy
     public function restoreAny(AuthUser $authUser): bool
     {
         return $authUser->can('RestoreAny:User');
+    }
+
+    public function import(AuthUser $authUser): bool
+    {
+        return $authUser->can('Import:User');
+    }
+
+    public function export(AuthUser $authUser): bool
+    {
+        return $authUser->can('Export:User');
     }
 }

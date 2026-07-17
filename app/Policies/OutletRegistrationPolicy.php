@@ -61,4 +61,9 @@ class OutletRegistrationPolicy
     {
         return $authUser->can('RestoreAny:OutletRegistration');
     }
+
+    public function export(AuthUser $authUser, OutletRegistration $outletRegistration): bool
+    {
+        return $authUser->can('Export:OutletRegistration');
+    }
 }

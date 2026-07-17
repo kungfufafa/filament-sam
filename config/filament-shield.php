@@ -1,9 +1,11 @@
 <?php
 
 declare(strict_types=1);
+use App\Filament\Resources\OutletRegistrations\OutletRegistrationResource;
 use App\Filament\Resources\Outlets\OutletResource;
 use App\Filament\Resources\PlanVisits\PlanVisitResource;
 use App\Filament\Resources\Users\UserResource;
+use App\Filament\Resources\Visits\VisitResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Pages\Dashboard;
 use Filament\Widgets\AccountWidget;
@@ -30,7 +32,7 @@ return [
             'pages' => true,
             'widgets' => true,
             'resources' => true,
-            'custom_permissions' => false,
+            'custom_permissions' => true,
         ],
     ],
 
@@ -183,6 +185,14 @@ return [
                 'viewAny', 'view', 'create', 'update', 'delete', 'deleteAny', 'restore',
                 'forceDelete', 'forceDeleteAny', 'restoreAny', 'import', 'export',
             ],
+            OutletRegistrationResource::class => [
+                'viewAny', 'view', 'create', 'update', 'delete', 'deleteAny', 'restore',
+                'forceDelete', 'forceDeleteAny', 'restoreAny', 'export',
+            ],
+            VisitResource::class => [
+                'viewAny', 'view', 'create', 'update', 'delete', 'deleteAny', 'restore',
+                'forceDelete', 'forceDeleteAny', 'restoreAny', 'export',
+            ],
             RoleResource::class => [
                 'viewAny',
                 'view',
@@ -246,7 +256,10 @@ return [
     |
     */
 
-    'custom_permissions' => [],
+    'custom_permissions' => [
+        'impersonate_user',
+        'view_horizon',
+    ],
 
     /*
     |--------------------------------------------------------------------------

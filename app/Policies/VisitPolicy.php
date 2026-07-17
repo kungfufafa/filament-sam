@@ -61,4 +61,9 @@ class VisitPolicy
     {
         return $authUser->can('RestoreAny:Visit');
     }
+
+    public function export(AuthUser $authUser, Visit $visit): bool
+    {
+        return $authUser->can('Export:Visit');
+    }
 }

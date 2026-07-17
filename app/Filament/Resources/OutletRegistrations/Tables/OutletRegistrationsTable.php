@@ -4,9 +4,11 @@ namespace App\Filament\Resources\OutletRegistrations\Tables;
 
 use App\Enums\OutletRegistrationStatus;
 use App\Enums\OutletRegistrationType;
+use App\Filament\Exports\OutletRegistrationExporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportBulkAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
@@ -83,6 +85,9 @@ class OutletRegistrationsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    ExportBulkAction::make()
+                        ->exporter(OutletRegistrationExporter::class)
+                        ->authorize(fn (): bool => auth()->user()?->can('Export:OutletRegistration') ?? false),
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),

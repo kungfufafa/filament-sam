@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\Visits\Tables;
 
+use App\Filament\Exports\VisitExporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportBulkAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
@@ -59,6 +61,9 @@ class VisitsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    ExportBulkAction::make()
+                        ->exporter(VisitExporter::class)
+                        ->authorize(fn (): bool => auth()->user()?->can('Export:Visit') ?? false),
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),

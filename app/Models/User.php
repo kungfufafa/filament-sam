@@ -142,4 +142,14 @@ class User extends Authenticatable implements HasAvatar, HasName
     {
         return $this->hasMany(OneSignalSubscription::class);
     }
+
+    public function canImpersonate(): bool
+    {
+        return $this->can('ImpersonateUser');
+    }
+
+    public function canBeImpersonated(): bool
+    {
+        return ! $this->hasRole('super_admin');
+    }
 }

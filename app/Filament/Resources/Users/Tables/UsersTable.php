@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use STS\FilamentImpersonate\Actions\Impersonate;
 
 class UsersTable
 {
@@ -59,6 +60,7 @@ class UsersTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Impersonate::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

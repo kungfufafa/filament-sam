@@ -27,16 +27,6 @@ class PlanVisitPolicy
         return $authUser->can('Create:PlanVisit');
     }
 
-    public function import(AuthUser $authUser): bool
-    {
-        return $authUser->can('Import:PlanVisit');
-    }
-
-    public function export(AuthUser $authUser): bool
-    {
-        return $authUser->can('Export:PlanVisit');
-    }
-
     public function update(AuthUser $authUser, PlanVisit $planVisit): bool
     {
         return $authUser->can('Update:PlanVisit');
@@ -70,5 +60,15 @@ class PlanVisitPolicy
     public function restoreAny(AuthUser $authUser): bool
     {
         return $authUser->can('RestoreAny:PlanVisit');
+    }
+
+    public function import(AuthUser $authUser, PlanVisit $planVisit): bool
+    {
+        return $authUser->can('Import:PlanVisit');
+    }
+
+    public function export(AuthUser $authUser, PlanVisit $planVisit): bool
+    {
+        return $authUser->can('Export:PlanVisit');
     }
 }
